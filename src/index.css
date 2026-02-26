@@ -182,8 +182,12 @@ body {
   flex-direction: column;
   gap: 1.5rem;
   height: calc(100vh - 3rem);
+  max-height: calc(100vh - 3rem);
   position: sticky;
   top: 1.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
 }
 
 .app-main {

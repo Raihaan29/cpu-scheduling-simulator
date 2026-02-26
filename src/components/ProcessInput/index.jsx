@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Trash2, RotateCcw, Zap } from 'lucide-react';
-import { ALGORITHMS } from '../utils/algorithms';
+import { Plus, Trash2, Settings, Play, RefreshCw, Layers, Zap, RotateCcw } from 'lucide-react';
+// Changed from ../utils/algorithms because we moved down a directory
+import { runAllSimulations, ALGORITHMS } from '../../utils/algorithms';
 
 const ProcessInput = ({
     processes,
@@ -16,7 +17,7 @@ const ProcessInput = ({
 }) => {
 
     const handleAddProcess = () => {
-        const newId = `P${processes.length + 1}`;
+        const newId = `P${processes.length + 1} `;
         setProcesses([
             ...processes,
             { id: newId, at: 0, bt: 1, priority: 1 }
@@ -114,9 +115,9 @@ const ProcessInput = ({
                 </button>
             </div>
 
-            <div style={{ overflowX: 'auto', marginTop: '0.5rem' }}>
+            <div style={{ overflowX: 'auto', overflowY: 'auto', maxHeight: '350px', marginTop: '0.5rem', paddingRight: '0.2rem' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
-                    <thead>
+                    <thead style={{ position: 'sticky', top: 0, zIndex: 10 }}>
                         <tr style={{ background: 'var(--table-header)', borderBottom: '1px solid var(--table-border)' }}>
                             <th style={{ padding: '0.75rem', textAlign: 'left' }}>ID</th>
                             <th style={{ padding: '0.75rem', textAlign: 'center' }}>AT</th>
@@ -138,25 +139,25 @@ const ProcessInput = ({
                                 >
                                     <td style={{ padding: '0.5rem' }}>
                                         <span style={{
-                                            background: 'rgba(79, 70, 229, 0.1)',
+                                            background: 'rgba(59, 130, 246, 0.1)',
                                             color: 'var(--primary)',
                                             padding: '0.2rem 0.5rem',
                                             borderRadius: '12px',
                                             fontWeight: 600
                                         }}>{p.id}</span>
                                     </td>
-                                    <td style={{ padding: '0.5rem' }}>
+                                    <td style={{ padding: '0.5rem', textAlign: 'center' }}>
                                         <input type="number" min="0" value={p.at} onChange={(e) => handleUpdate(i, 'at', e.target.value)}
-                                            style={{ width: '50px', padding: '0.25rem', border: 'none', background: 'transparent', textAlign: 'center', color: 'inherit' }} />
+                                            style={{ width: '50px', padding: '0.25rem', border: '1px solid var(--input-border)', borderRadius: '4px', background: 'var(--input-bg)', textAlign: 'center', color: 'inherit' }} />
                                     </td>
-                                    <td style={{ padding: '0.5rem' }}>
+                                    <td style={{ padding: '0.5rem', textAlign: 'center' }}>
                                         <input type="number" min="1" value={p.bt} onChange={(e) => handleUpdate(i, 'bt', e.target.value)}
-                                            style={{ width: '50px', padding: '0.25rem', border: 'none', background: 'transparent', textAlign: 'center', color: 'inherit' }} />
+                                            style={{ width: '50px', padding: '0.25rem', border: '1px solid var(--input-border)', borderRadius: '4px', background: 'var(--input-bg)', textAlign: 'center', color: 'inherit' }} />
                                     </td>
                                     {showPriority && (
-                                        <td style={{ padding: '0.5rem' }}>
+                                        <td style={{ padding: '0.5rem', textAlign: 'center' }}>
                                             <input type="number" min="1" value={p.priority} onChange={(e) => handleUpdate(i, 'priority', e.target.value)}
-                                                style={{ width: '50px', padding: '0.25rem', border: 'none', background: 'transparent', textAlign: 'center', color: 'inherit' }} />
+                                                style={{ width: '50px', padding: '0.25rem', border: '1px solid var(--input-border)', borderRadius: '4px', background: 'var(--input-bg)', textAlign: 'center', color: 'inherit' }} />
                                         </td>
                                     )}
                                     <td style={{ padding: '0.5rem', textAlign: 'center' }}>
